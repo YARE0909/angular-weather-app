@@ -1,0 +1,61 @@
+<div class="w-ful h-full p-4">
+  <div class="w-full h-fit flex items-center justify-center gap-5">
+    <input
+      placeholder="Enter a city"
+      class="rounded-lg bg-gray-200 p-4 w-full md:w-[50vw] text-black outline-none"
+      [(ngModel)]="city"
+    />
+    <button
+      class="p-4 bg-purple-500 rounded-lg hover:bg-purple-500/50 duration-500"
+      (click)="onSubmit()"
+    >
+      Search
+    </button>
+  </div>
+  <div *ngIf="dataState">
+    <div class="w-full h-fit flex justify-center items-center p-4">
+      <h1 class="text-3xl font-bold">Current Report</h1>
+    </div>
+    <div
+      class="w-full h-fit flex flex-col md:flex md:flex-row justify-center items-start gap-5"
+    >
+      <div
+        class="w-full h-full flex flex-col items-center justify-center p-4 bg-purple-500 rounded-lg"
+      >
+        <h1 class="font-bold text-xl">Temperature</h1>
+        <h1>{{ data.temp }}</h1>
+      </div>
+      <div
+        class="w-full h-full flex flex-col items-center justify-center p-4 bg-purple-500 rounded-lg"
+      >
+        <h1 class="font-bold text-xl">Condition</h1>
+        <h1>{{ data.condition }}</h1>
+      </div>
+      <div
+        class="w-full h-full flex flex-col items-center justify-center p-4 bg-purple-500 rounded-lg"
+      >
+        <h1 class="font-bold text-xl">Humidity</h1>
+        <h1>{{ data.humidity }}%</h1>
+      </div>
+    </div>
+    <div class="w-full h-fit flex justify-center items-center p-4 mt-8">
+      <h1 class="text-3xl font-bold">Hourly Report</h1>
+    </div>
+    <app-hourly-info [hourlyData]="data.forecast"></app-hourly-info>
+  </div>
+  <div *ngIf="error" class="w-full h-fit flex justify-center items-center pt-2">
+    <h1 class="text-red-600 text-base">Something went wrong</h1>
+  </div>
+  <div
+    *ngIf="fieldError"
+    class="w-full h-fit flex justify-center items-center pt-2"
+  >
+    <h1 class="text-red-600 text-base">Please Enter A City</h1>
+  </div>
+  <div
+    *ngIf="!dataState"
+    class="w-full h-full flex justify-center items-center pt-20"
+  >
+    <h1 class="text-4xl text-gray-600">Search for a city</h1>
+  </div>
+</div>
